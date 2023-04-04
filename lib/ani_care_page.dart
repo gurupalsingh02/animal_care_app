@@ -122,9 +122,9 @@ class _AniCarePageState extends State<AniCarePage> {
           ).px32(),
         ],
       ),
-      body: SingleChildScrollView(
-        child: curr_index == 1
-            ? Column(
+      body: curr_index == 1
+          ? SingleChildScrollView(
+              child: Column(
                 children: [
                   IconButton(
                       onPressed: () async {
@@ -190,10 +190,12 @@ class _AniCarePageState extends State<AniCarePage> {
                           }).expand()
                       : const Center(child: Text("No Cases on selected Date"))
                 ],
-              ).h(MediaQuery.of(context).size.height * 0.82)
-            : curr_index == 0
-                ? Center(
-                    child: Column(
+              ).h(MediaQuery.of(context).size.height * 0.82),
+            )
+          : curr_index == 0
+              ? SingleChildScrollView(
+                  child: Center(
+                      child: Column(
                     mainAxisAlignment: MainAxisAlignment.spaceAround,
                     children: [
                       Card(
@@ -264,63 +266,51 @@ class _AniCarePageState extends State<AniCarePage> {
                         }),
                       ).p12(),
                     ],
-                  )).h(MediaQuery.of(context).size.height * 0.81)
-                : Column(
-                    children: [
-                      ListView.builder(
-                          shrinkWrap: true,
-                          itemCount: AniCarePage.allcases.length,
-                          itemBuilder: (context, index) {
-                            return Card(
-                                    shape: RoundedRectangleBorder(
-                                        borderRadius:
-                                            BorderRadius.circular(20)),
-                                    clipBehavior: Clip.antiAlias,
-                                    elevation: 10.0,
-                                    child: Row(
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.spaceBetween,
-                                      children: [
-                                        Column(
-                                          crossAxisAlignment:
-                                              CrossAxisAlignment.start,
-                                          children: [
-                                            AniCarePage
-                                                .allcases[index].animal.text
-                                                .color(Colors.black)
-                                                .make(),
-                                            AniCarePage
-                                                .allcases[index].Doctor.text
-                                                .color(Colors.black)
-                                                .make(),
-                                            AniCarePage
-                                                .allcases[index].disease.text
-                                                .color(Colors.black)
-                                                .make(),
-                                          ],
-                                        ).p16(),
-                                        AniCarePage.allcases[index].completed
-                                            ? "Completed".text.make().p12()
-                                            : "Not Completed".text.make().p12(),
-                                      ],
-                                    )
-                                        .box
-                                        .color(
-                                            Color.fromARGB(213, 239, 249, 238))
-                                        .roundedSM
-                                        .make())
-                                .onTap(() {
-                                  CaseDetailPage.selectedcase =
-                                      AniCarePage.allcases[index];
-                                  Navigator.pushNamed(
-                                      context, MyRoutes.CaseDetailPage);
-                                })
-                                .px8()
-                                .py4();
-                          }).expand()
-                    ],
-                  ).h(MediaQuery.of(context).size.height),
-      ),
+                  )).h(MediaQuery.of(context).size.height * 0.81),
+                )
+              : ListView.builder(
+                  shrinkWrap: true,
+                  itemCount: AniCarePage.allcases.length,
+                  itemBuilder: (context, index) {
+                    return Card(
+                            shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(20)),
+                            clipBehavior: Clip.antiAlias,
+                            elevation: 10.0,
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: [
+                                Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    AniCarePage.allcases[index].animal.text
+                                        .color(Colors.black)
+                                        .make(),
+                                    AniCarePage.allcases[index].Doctor.text
+                                        .color(Colors.black)
+                                        .make(),
+                                    AniCarePage.allcases[index].disease.text
+                                        .color(Colors.black)
+                                        .make(),
+                                  ],
+                                ).p16(),
+                                AniCarePage.allcases[index].completed
+                                    ? "Completed".text.make().p12()
+                                    : "Not Completed".text.make().p12(),
+                              ],
+                            )
+                                .box
+                                .color(Color.fromARGB(213, 239, 249, 238))
+                                .roundedSM
+                                .make())
+                        .onTap(() {
+                          CaseDetailPage.selectedcase =
+                              AniCarePage.allcases[index];
+                          Navigator.pushNamed(context, MyRoutes.CaseDetailPage);
+                        })
+                        .px8()
+                        .py4();
+                  }).h(MediaQuery.of(context).size.height),
       bottomNavigationBar: BottomNavigationBar(
           unselectedItemColor: Colors.green,
           selectedItemColor: Colors.lightBlue,
@@ -337,10 +327,6 @@ class _AniCarePageState extends State<AniCarePage> {
                 icon: Icon(Icons.calendar_month),
                 tooltip: "Calendar View",
                 label: "Calendar"),
-            BottomNavigationBarItem(
-                icon: Icon(Icons.account_circle_rounded),
-                tooltip: "Account Page",
-                label: "Account"),
             BottomNavigationBarItem(
                 icon: Icon(Icons.cases_rounded),
                 tooltip: "All Cases Page",
