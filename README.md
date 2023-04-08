@@ -1,4 +1,4 @@
-# ssip_hackathon_2022
+# animal_care_app
 
 A new Flutter project.
 
